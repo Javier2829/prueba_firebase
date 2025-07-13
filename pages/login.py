@@ -9,6 +9,10 @@ def validarUsuario(user, pasw):
     if user == 'fredy' and pasw == '1526':
         st.info(f'Usuario {user} logueado')
         return
+    elif user:
+        st.warning('Debes completar los campos')
+    elif pasw:
+        st.error('Debes ingresar la costraseña')
     else:
         st.toast('Usuario o constraseña invalida', icon=":material/error:")
 
@@ -23,11 +27,7 @@ def generarLogin():
             btLogin = st.form_submit_button('Ingresar')
 
             if btLogin:
-                if user:
-                    st.warning('Debes completar los campos')
-                elif pasw:
-                    st.error('Debes ingresar la costraseña')
-                elif validarUsuario(user, pasw):
+                if validarUsuario(user, pasw):
                     st.session_state['usuario'] = user
 
 
