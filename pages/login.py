@@ -7,9 +7,10 @@ def generarMenu(param):
 
 def validarUsuario(user, pasw):
     if user == 'fredy' and pasw == '1526':
+        st.info(f'Usuario {user} logueado')
         return
     else:
-        st.toast('Debes completar los dato', icon=":material/error:")
+        st.toast('Usuario o constraseña invalida', icon=":material/error:")
 
 
 def generarLogin():
@@ -22,11 +23,14 @@ def generarLogin():
             btLogin = st.form_submit_button('Ingresar')
 
             if btLogin:
-                if validarUsuario(user, pasw):
+                if user:
+                    st.warning('Debes completar los campos')
+                elif pasw:
+                    st.error('Debes ingresar la costraseña')
+                elif validarUsuario(user, pasw):
                     st.session_state['usuario'] = user
-                    st.info('logueado')
-                else:
-                    st.toast('Ingresar una contraseña')
+
+
 
 
 generarLogin()
